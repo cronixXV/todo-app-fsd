@@ -25,7 +25,7 @@ export const MainLayout = () => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Todo-app
+            Todo-app-fsd
           </Typography>
         </Toolbar>
       </AppBar>
@@ -44,20 +44,13 @@ export const MainLayout = () => {
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
           <List>
-            {["Home", "About", "Contact"].map((text) => (
-              <ListItem
-                component={Link}
-                to={`/${text.toLowerCase()}`}
-                key={text}
-              >
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
+            <ListItem component={Link} to="/" key="Main">
+              <ListItemText primary="Главная" />
+            </ListItem>
           </List>
         </Box>
       </Drawer>
 
-      {/* Main Content */}
       <Box
         component="main"
         sx={{
