@@ -12,30 +12,28 @@ export const useTaskStore = create<TaskState>((set) => ({
   isUpdateLoading: false,
 
   getTaskList: async (params: QueryParams) => {
-    set((state) => ({ ...state, isLoading: true }));
+    set({ isLoading: true, taskListError: "" });
     try {
       const data = await getTodo(params);
-      set((state) => ({ ...state, isLoading: false, taskList: data }));
+      set({ taskList: data, isLoading: false });
     } catch (error) {
-      if (error instanceof Error) {
-        set((state) => ({
-          ...state,
-          isLoading: false,
-          taskListError: error.message,
-        }));
-      }
+      set({
+        isLoading: false,
+        taskListError: error instanceof Error ? error.message : "Unknown error",
+      });
     }
   },
 
   getTask: async (id: string) => {
-    set((state) => ({ ...state, isLoading: true }));
+    set({ isLoading: true, taskError: "" });
     try {
       const data = await getTodoById(id);
-      set((state) => ({ ...state, isLoading: false, task: data }));
+      set({ task: data, isLoading: false });
     } catch (error) {
-      if (error instanceof Error) {
-        set({ isLoading: false, taskError: error.message });
-      }
+      set({
+        isLoading: false,
+        taskError: error instanceof Error ? error.message : "Unknown error",
+      });
     }
   },
 

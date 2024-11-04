@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import React from "react";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
@@ -44,10 +45,10 @@ export const TaskCard = ({ text, title, actions, loading }: Props) => {
           <CardContent>
             <Typography variant="body2">{text}</Typography>
           </CardContent>
-          {actions && (
+          {actions && actions.length > 0 && (
             <CardActions>
               {actions.map((action, index) => (
-                <div key={index}>{action}</div>
+                <React.Fragment key={index}>{action}</React.Fragment>
               ))}
             </CardActions>
           )}

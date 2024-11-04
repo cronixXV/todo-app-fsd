@@ -43,26 +43,9 @@ export const MainLayout = () => {
       >
         <Toolbar />
         <Box sx={{ overflow: "auto" }}>
-          {/* <List>
-            {["Home", "About", "Contact"].map((text) => (
-              <ListItem
-                component={Link}
-                to={`/${text.toLowerCase()}`}
-                key={text}
-              >
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List> */}
           <List>
-            <ListItem component={Link} to="/" key="Home">
-              <ListItemText primary="Home" />
-            </ListItem>
-            <ListItem component={Link} to="/about" key="About">
-              <ListItemText primary="About" />
-            </ListItem>
-            <ListItem component={Link} to="/contact" key="Contact">
-              <ListItemText primary="Contact" />
+            <ListItem component={Link} to="/" key="Main">
+              <ListItemText primary="Главная" />
             </ListItem>
           </List>
         </Box>

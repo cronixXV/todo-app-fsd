@@ -1,15 +1,14 @@
-import { Box, Stack, Typography, CircularProgress } from "@mui/material";
-import { taskModel, TaskRow } from "entities/task";
 import { useEffect } from "react";
+import { taskModel, TaskRow } from "entities/task";
+import { Box, CircularProgress, Stack, Typography } from "@mui/material";
+import { ToggleTask } from "features/toggle-task";
+import { TaskFilter } from "features/task-filter";
 
 export const TodoListPage = () => {
-  const { getTaskList, isLoading, taskListError, taskList } =
-    taskModel.useTaskStore((state) => ({
-      getTaskList: state.getTaskList,
-      isLoading: state.isLoading,
-      taskListError: state.taskListError,
-      taskList: state.taskList,
-    }));
+  const taskList = taskModel.useTaskStore((state) => state.taskList);
+  const getTaskList = taskModel.useTaskStore((state) => state.getTaskList);
+  const isLoading = taskModel.useTaskStore((state) => state.isLoading);
+  const taskListError = taskModel.useTaskStore((state) => state.taskListError);
 
   useEffect(() => {
     getTaskList({});
@@ -24,9 +23,10 @@ export const TodoListPage = () => {
       </Box>
     );
   }
+
   return (
     <Stack spacing={2} direction="column">
-      <Typography>filter</Typography>
+      <TaskFilter onChange={getTaskList} />
       {isLoading ? (
         <Box display="flex" justifyContent="center" py={2}>
           <CircularProgress />
@@ -37,7 +37,7 @@ export const TodoListPage = () => {
             key={task.id}
             title={task.title}
             id={task.id}
-            // action={undefined}
+            action={<ToggleTask todo={task} />}
           />
         ))
       )}
